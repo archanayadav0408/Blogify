@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Login Page{% endblock %}
+
+{% block content %}
+<div class="row py-5 backimg" style="background-color: #F4F0E4; min-height: 70vh;">
+    <div class="col-sm-4 shadow p-4 mx-auto align-self-center"
+        style="background-color: #30364F; border-radius: 10px; color: #F4F0E4;">
+        <h3 class="text-center mb-2">Admin Login</h3>
+        <p class="text-center mb-4" style="color: #ACBAC4;">Use your Blogify admin credentials.</p>
+
+        <form method="post" novalidate>
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+            <div class="alert alert-warning">
+                {% for error in form.non_field_errors %}
+                <div>{{ error }}</div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <label class="form-label" for="{{ form.username.id_for_label }}">Username</label>
+            {{ form.username }}
+            {% if form.username.errors %}
+            <div class="text-warning small mb-3">{{ form.username.errors|join:', ' }}</div>
+            {% endif %}
+
+            <label class="form-label" for="{{ form.password.id_for_label }}">Password</label>
+            {{ form.password }}
+            {% if form.password.errors %}
+            <div class="text-warning small mb-3">{{ form.password.errors|join:', ' }}</div>
+            {% endif %}
+
+            <div class="d-grid mt-4">
+                <button type="submit" class="btn w-50"
+                    style="background-color: #ACBAC4; color: #30364F; font-size: 1.1rem; font-weight: 600; margin: 0 auto;">
+                    Login
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

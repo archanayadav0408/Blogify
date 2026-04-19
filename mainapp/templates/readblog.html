@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ blog.title }}{% endblock %}
+
+{% block content %}
+<div class="row py-4" style="background-color: #F4F0E4;">
+    <div class="col-lg-8 mx-auto">
+        <div class="card border-0 shadow-sm p-4">
+            <div class="text-center">
+                {% if blog.image %}
+                <img src="{{ blog.image.url }}" alt="{{ blog.title }}" class="img-fluid"
+                    style="max-height: 400px; border-radius: 10px; object-fit: cover;">
+                {% else %}
+                <img src="{% static 'img/back.webp' %}" alt="Default blog cover" class="img-fluid"
+                    style="max-height: 400px; border-radius: 10px; object-fit: cover;">
+                {% endif %}
+            </div>
+
+            <div class="mt-4">
+                <h1 class="text-center mb-3">{{ blog.title }}</h1>
+                <h2 class="text-center mb-4 text-muted">{{ blog.subtitle }}</h2>
+
+                <div class="d-flex flex-wrap gap-3 justify-content-center mb-4 text-muted">
+                    <span><strong>Author:</strong> {{ blog.author }}</span>
+                    <span><strong>Published:</strong> {{ blog.published_at|date:"M d, Y H:i" }}</span>
+                    <span><strong>Views:</strong> {{ blog.views }}</span>
+                </div>
+
+                <div class="fs-5 lh-lg">{{ blog.content|linebreaks }}</div>
+            </div>
+        </div>
+
+        <div class="card border-0 shadow-sm p-4 mt-4">
+            <h3 class="mb-3">Leave a Comment</h3>
+            <form method="post" novalidate>
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label" for="{{ comment_form.name.id_for_label }}">Name</label>
+                    {{ comment_form.name }}
+                    {% if comment_form.name.errors %}
+                    <div class="text-danger small mt-1">{{ comment_form.name.errors|join:', ' }}</div>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="{{ comment_form.comment.id_for_label }}">Comment</label>
+                    {{ comment_form.comment }}
+                    {% if comment_form.comment.errors %}
+                    <div class="text-danger small mt-1">{{ comment_form.comment.errors|join:', ' }}</div>
+                    {% endif %}
+                </div>
+                <button type="submit" class="btn" style="background-color: #30364F; color: #F0F0DB;">
+                    Post Comment
+                </button>
+            </form>
+        </div>
+
+        <div class="card border-0 shadow-sm p-4 mt-4 mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 class="mb-0">Comments</h3>
+                <span class="text-muted">{{ comments|length }} total</span>
+            </div>
+
+            {% for comment in comments %}
+            <div class="border rounded p-3 mb-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <strong>{{ comment.name }}</strong>
+                    <span class="text-muted small">{{ comment.created_at|date:"M d, Y H:i" }}</span>
+                </div>
+                <div class="mb-0">{{ comment.comment|linebreaks }}</div>
+            </div>
+            {% empty %}
+            <p class="mb-0 text-muted">No comments yet. Be the first to share your thoughts.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

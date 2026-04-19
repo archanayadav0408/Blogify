@@ -1,0 +1,59 @@
+body{
+    overflow-x: hidden;
+}
+.header{
+    height: 10vh;
+    background-color:  #30364F;
+    color: #F0F0DB;
+}
+.header h4{
+    margin-bottom: 0;
+}
+.main{
+    height: 90vh;
+}
+.sidebar{
+    background-color:  #30364F;
+    color: #F0F0DB;
+    font-weight: 500;
+}
+
+/* .card-body{
+    height: 500px;
+} */
+
+.sideMenu li{
+    margin-top: 0.8rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+.sideMenu li i{
+    margin-left: 0.5rem;
+    margin-right: 1.1rem;
+}
+.sideMenu li a{
+    color: #30364F;
+    text-decoration: none;
+}
+.mainDash{
+    color: #30364F;
+}
+.mainDash p{
+    font-weight: 500;
+}
+
+.d-board-card i{
+    color: gray;
+}
+.d-board-card{
+    color: #30364F;
+    transition: 0.3s ;
+}
+.d-board-card:hover{
+    transform: scale(1.05);
+    color: #F0F0DB;
+    background: #30364F;
+}
+.d-board-card:hover i{
+    color: #F0F0DB;
+}

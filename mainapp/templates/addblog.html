@@ -1,0 +1,22 @@
+{% extends 'adminbase.html' %}
+
+{% block admin %}
+<div class="row p-3">
+    <div class="col-sm-12">
+        <h1 class="my-2 mb-3" style="font-size: 2rem; color: #30364F;">Add New Blog</h1>
+        <hr>
+    </div>
+
+    <div class="col-lg-8 mx-auto">
+        <div class="p-4 mt-2" style="background-color: #30364F; border-radius: 10px; color: #F0F0DB; font-size: 1.05rem;">
+            <form method="post" enctype="multipart/form-data" novalidate>
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn w-100 my-2" style="background-color: #ACBAC4; color: #30364F;">
+                    Publish Blog
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
